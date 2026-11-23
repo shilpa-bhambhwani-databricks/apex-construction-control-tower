@@ -1,0 +1,35 @@
+import type { BrandConfig } from './types'
+
+/** Neutral house brand — the unbranded base every customer brand overrides. */
+export const apex: BrandConfig = {
+  id: 'apex',
+  customerName: 'Apex Construction',
+  shortName: 'Apex',
+  appName: 'Control Tower',
+  tagline: 'Construction operations intelligence on Databricks',
+  logo: { onDark: '/brands/apex/logo-on-dark.svg', onLight: '/brands/apex/logo-on-light.svg', alt: 'Apex', height: 24 },
+  colors: {
+    chrome: '#1B2430',
+    chromeText: '#FFFFFF',
+    primary: '#2F6FED',
+    primaryHover: '#1D4FB8',
+    primaryText: '#FFFFFF',
+    accent: '#F5A524',
+    accentHover: '#D98E12',
+    accentText: '#1B2430',
+    ink: '#1A1D21',
+    inkMuted: '#6B7280',
+    border: '#E2E5EA',
+    surface: '#FFFFFF',
+    surfaceAlt: '#F5F6F8',
+    primaryTint: '#EDF3FE',
+    riskRamp: ['#2E7D6B', '#74B3A2', '#BCDCD2', '#E7E4DF', '#E8B49A', '#C8673F', '#7A2E18'],
+  },
+  fonts: { body: '"Inter Variable", system-ui, sans-serif', heading: '"Inter Variable", system-ui, sans-serif', headingWeight: 500 },
+  radius: '6px',
+  modules: ['risk-radar', 'resolve', 'jobsite'],
+  demoPersona: { name: 'Demo User', role: 'Project Executive', scope: 'Region: All' },
+  sectors: ['Data Center', 'Healthcare', 'Aviation', 'Commercial', 'Education'],
+  regions: ['Northeast', 'Midwest', 'Southeast', 'West', 'Southwest'],
+  systemsOfRecord: ['Procore', 'SAP', 'Primavera P6'],
+}

@@ -1,0 +1,11 @@
+node_modules/
+dist/
+.venv/
+__pycache__/
+*.py[cod]
+.env
+.databricks/
+.DS_Store
+scripts/.genie_*
+scripts/.margin_alert_id
+scripts/.resolve_experiment_id

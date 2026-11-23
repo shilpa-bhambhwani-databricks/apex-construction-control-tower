@@ -1,0 +1,37 @@
+# Lakeflow Spark Declarative Pipeline for the Construction Control Tower.
+# Ingests the raw synthetic feeds from a Unity Catalog volume into governed bronze/silver tables.
+# Docs: https://docs.databricks.com/aws/en/ldp/  ·  https://docs.databricks.com/aws/en/dev-tools/bundles/
+#
+# Deploy + run (the workspace comes from your CLI profile):
+#   databricks bundle deploy -p <profile>
+#   databricks bundle run control_tower_ingest -p <profile>
+bundle:
+  name: construction-control-tower-ingest
+
+variables:
+  catalog:
+    description: Unity Catalog catalog that holds the Control Tower dataset
+    default: bhambs
+  schema:
+    description: Schema that holds the Control Tower dataset
+    default: construction_control_tower
+
+resources:
+  pipelines:
+    control_tower_ingest:
+      name: construction-control-tower-ingest
+      catalog: ${var.catalog}
+      schema: ${var.schema}
+      serverless: true
+      continuous: false
+      root_path: .
+      libraries:
+        - glob:
+            include: ./transformations/**
+      configuration:
+        # Landing zone: synthetic source-system extracts written by data_gen/generate.py
+        raw_path: /Volumes/${var.catalog}/${var.schema}/raw/v1
+
+targets:
+  demo:
+    default: true

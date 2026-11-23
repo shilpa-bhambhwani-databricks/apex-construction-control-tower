@@ -1,0 +1,29 @@
+# Databricks App config — Construction Control Tower.
+# Docs: https://docs.databricks.com/aws/en/dev-tools/databricks-apps/app-runtime
+# Resources (declared on the app; see scripts/deploy_app.py) are referenced by key via valueFrom.
+command: ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000"]
+env:
+  - name: BRAND
+    value: apex                         # UI brand only — data is shared across customers
+  - name: DEMO_MODE
+    value: "true"                       # enables the simulated-identity switch in the header
+  - name: WAREHOUSE_ID
+    valueFrom: sql-warehouse
+  - name: GENIE_SPACE_ID
+    valueFrom: genie-space
+  - name: LAKEBASE_ENDPOINT
+    value: projects/construction-control-tower/branches/production/endpoints/primary
+  - name: CT_NORTHEAST_PM_CLIENT_ID
+    valueFrom: np-client-id
+  - name: CT_NORTHEAST_PM_CLIENT_SECRET
+    valueFrom: np-client-secret
+  - name: CT_SUPERINTENDENT_CLIENT_ID
+    valueFrom: supt-client-id
+  - name: CT_SUPERINTENDENT_CLIENT_SECRET
+    valueFrom: supt-client-secret
+  # Slack follow-up alerts: id of a workspace notification destination (Settings → Notifications) holding the Slack
+  # incoming-webhook URL. Empty = Slack off. https://docs.databricks.com/aws/en/admin/workspace-settings/notification-destinations
+  - name: SLACK_DESTINATION_ID
+    value: ""
+  - name: SLACK_CHANNEL
+    value: ""                           # display only, e.g. "#control-tower-demo"
